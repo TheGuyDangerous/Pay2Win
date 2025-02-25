@@ -733,7 +733,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
         }
       }
     } catch (e) {
-      print('Error removing profile picture: $e');
+      debugPrint('Error removing profile picture: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to remove profile picture: ${e.toString()}')),
@@ -764,13 +764,13 @@ class CustomButton extends StatelessWidget {
   final Color? color;
   
   const CustomButton({
-    Key? key,
+    super.key,
     required this.text,
     this.icon,
     this.onPressed,
     this.isLoading = false,
     this.color,
-  }) : super(key: key);
+  });
   
   @override
   Widget build(BuildContext context) {

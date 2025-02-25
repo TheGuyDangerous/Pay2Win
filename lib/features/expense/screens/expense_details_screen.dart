@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../../../core/theme/colors.dart';
-import '../../../core/constants/app_constants.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../providers/expense_provider.dart';
 import '../../auth/providers/auth_provider.dart';
@@ -107,9 +106,9 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
                 Navigator.of(context).pop();
                 _deleteExpense();
               },
-              child: Text(
+              child: const Text(
                 'DELETE',
-                style: const TextStyle(
+                style: TextStyle(
                   color: AppColors.red,
                   fontFamily: 'SpaceMono',
                   fontSize: 14,

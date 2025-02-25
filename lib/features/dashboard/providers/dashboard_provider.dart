@@ -122,12 +122,12 @@ class DashboardProvider extends ChangeNotifier {
       }
     } catch (e) {
       _setError(e.toString());
-      print('Error in DashboardProvider.initialize: $e');
+      debugPrint('Error in DashboardProvider.initialize: $e');
       
       // If Firestore is not available, load mock data
       if (e.toString().contains('permission-denied') || 
           e.toString().contains('Cloud Firestore API has not been used')) {
-        print('Firestore unavailable, loading mock data instead');
+        debugPrint('Firestore unavailable, loading mock data instead');
         await _loadMockData();
       }
     } finally {
@@ -137,7 +137,7 @@ class DashboardProvider extends ChangeNotifier {
   
   // Load mock data for development/demo mode
   Future<void> _loadMockData() async {
-    print('Loading mock data for dashboard');
+    debugPrint('Loading mock data for dashboard');
     
     try {
       // Set mock user data
@@ -235,9 +235,9 @@ class DashboardProvider extends ChangeNotifier {
         ),
       ];
       
-      print('Mock data loaded successfully');
+      debugPrint('Mock data loaded successfully');
     } catch (e) {
-      print('Error loading mock data: $e');
+      debugPrint('Error loading mock data: $e');
     }
   }
   

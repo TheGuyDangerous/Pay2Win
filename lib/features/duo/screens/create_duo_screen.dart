@@ -131,7 +131,7 @@ class _CreateDuoScreenState extends State<CreateDuoScreen> {
                         border: Border.all(color: AppColors.white.withOpacity(0.5), width: 1),
                         borderRadius: BorderRadius.circular(40),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.add_circle_outline,
                         color: AppColors.white,
                         size: 36,

@@ -7,13 +7,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as path;
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/colors.dart';
-import '../../../core/utils/validators.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/custom_text_field.dart';
 import '../../auth/providers/auth_provider.dart';
 import '../../duo/providers/duo_provider.dart';
 import '../providers/expense_provider.dart';
-import '../../../models/expense_model.dart';
 import '../../../main.dart';
 
 class AddExpenseScreen extends StatefulWidget {
@@ -158,7 +156,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     try {
       // Skip actual upload if using mock data
       if (useMockData) {
-        print('Mock image upload for: ${_receiptImage!.path}');
+        debugPrint('Mock image upload for: ${_receiptImage!.path}');
         return 'https://example.com/receipts/$userId/$expenseId.jpg';
       }
       

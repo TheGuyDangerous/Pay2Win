@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/constants/app_constants.dart';
-import '../providers/duo_provider.dart';
 import '../../../core/widgets/dot_matrix_background.dart';
 
 class DuoSelectorScreen extends StatelessWidget {

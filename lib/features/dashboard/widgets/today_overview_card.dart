@@ -190,7 +190,7 @@ class TodayOverviewCard extends StatelessWidget {
                                       dotColor: borderColor.withOpacity(0.2),
                                       spacing: 4,
                                     ),
-                                    size: Size.fromHeight(8),
+                                    size: const Size.fromHeight(8),
                                   ),
                                 ),
                                 // Foreground progress
@@ -251,7 +251,7 @@ class TodayOverviewCard extends StatelessWidget {
                                       dotColor: borderColor.withOpacity(0.2),
                                       spacing: 4,
                                     ),
-                                    size: Size.fromHeight(8),
+                                    size: const Size.fromHeight(8),
                                   ),
                                 ),
                                 // Foreground progress

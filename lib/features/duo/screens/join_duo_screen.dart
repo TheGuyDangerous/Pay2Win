@@ -129,7 +129,7 @@ class _JoinDuoScreenState extends State<JoinDuoScreen> {
                         controller: _codeController,
                         decoration: InputDecoration(
                           hintText: 'Enter 6-digit code',
-                          hintStyle: TextStyle(color: AppColors.lightGrey),
+                          hintStyle: const TextStyle(color: AppColors.lightGrey),
                           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                           border: InputBorder.none,
                           enabledBorder: UnderlineInputBorder(
@@ -183,9 +183,9 @@ class _JoinDuoScreenState extends State<JoinDuoScreen> {
                                     strokeWidth: 2,
                                   ),
                                 )
-                              : Row(
+                              : const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
+                                  children: [
                                     Icon(Icons.check_circle_outline, size: 18),
                                     SizedBox(width: 8),
                                     Text(

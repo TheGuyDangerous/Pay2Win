@@ -55,7 +55,7 @@ class AuthService {
         
         if (!docSnapshot.exists) {
           // Create a basic user document if it doesn't exist
-          print('User document not found in Firestore. Creating a new one.');
+          debugPrint('User document not found in Firestore. Creating a new one.');
           final newUser = UserModel(
             id: userCredential.user!.uid,
             email: userCredential.user!.email ?? email,
@@ -72,7 +72,7 @@ class AuthService {
               .doc(newUser.id)
               .set(newUser.toJson());
           
-          print('Created new user document in Firestore');
+          debugPrint('Created new user document in Firestore');
         } else {
           // Update last active timestamp
           await _firestore
@@ -83,7 +83,7 @@ class AuthService {
           });
         }
       } catch (firestoreError) {
-        print('Error checking/creating Firestore document: $firestoreError');
+        debugPrint('Error checking/creating Firestore document: $firestoreError');
         // Don't fail the sign-in process if Firestore operations fail
       }
       
@@ -101,7 +101,7 @@ class AuthService {
     double monthlySalary,
     List<String> savingGoals,
   ) async {
-    print('AuthService.registerWithEmailAndPassword called with savingGoals: $savingGoals');
+    debugPrint('AuthService.registerWithEmailAndPassword called with savingGoals: $savingGoals');
     
     UserCredential userCredential;
     
@@ -112,9 +112,9 @@ class AuthService {
         password: password,
       );
       
-      print('Firebase Auth account created for uid: ${userCredential.user?.uid}');
+      debugPrint('Firebase Auth account created for uid: ${userCredential.user?.uid}');
     } catch (authError) {
-      print('Critical error in Firebase auth registration: $authError');
+      debugPrint('Critical error in Firebase auth registration: $authError');
       throw Exception('Failed to register authentication: ${authError.toString()}');
     }
     
@@ -133,7 +133,7 @@ class AuthService {
           lastActive: DateTime.now(),
         );
         
-        print('Attempting to save user data to Firestore: ${user.toJson()}');
+        debugPrint('Attempting to save user data to Firestore: ${user.toJson()}');
         
         await _firestore
             .collection(AppConstants.collectionUsers)
@@ -192,7 +192,7 @@ class AuthService {
         return UserModel.fromJson(doc.data()!);
       } else {
         // If document doesn't exist, create a basic one
-        print('User document not found in Firestore. Creating a new one from getUserData.');
+        debugPrint('User document not found in Firestore. Creating a new one from getUserData.');
         
         // Get basic info from Firebase Auth
         User? authUser = _auth.currentUser;
@@ -216,7 +216,7 @@ class AuthService {
             .doc(userId)
             .set(newUser.toJson());
         
-        print('Created new user document in Firestore from getUserData');
+        debugPrint('Created new user document in Firestore from getUserData');
         return newUser;
       }
     } catch (e) {
@@ -241,7 +241,7 @@ class AuthService {
     try {
       if (useMockData) {
         // In mock mode, just pretend the update succeeded
-        print('Mock profile picture updated to: $profilePictureUrl');
+        debugPrint('Mock profile picture updated to: $profilePictureUrl');
         return;
       }
       

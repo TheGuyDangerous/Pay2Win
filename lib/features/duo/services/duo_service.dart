@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
 import '../models/duo_model.dart';
 import '../../../main.dart'; // Import to access useMockData
+import 'package:flutter/foundation.dart';
 
 class DuoService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -35,7 +36,7 @@ class DuoService {
         return DuoModel.fromJson(docSnapshot.data()!);
       }
     } catch (e) {
-      print('Error getting duo: $e');
+      debugPrint('Error getting duo: $e');
       throw Exception('Failed to get duo: ${e.toString()}');
     }
   }
@@ -50,7 +51,7 @@ class DuoService {
       
       return code;
     } catch (e) {
-      print('Error generating code: $e');
+      debugPrint('Error generating code: $e');
       throw Exception('Failed to generate code: ${e.toString()}');
     }
   }
@@ -85,7 +86,7 @@ class DuoService {
         // Save code mapping
         await prefs.setString('code_$code', duoId);
         
-        print('Created mock duo with ID: $duoId and code: $code');
+        debugPrint('Created mock duo with ID: $duoId and code: $code');
         return duo;
       } else {
         // Use Firestore
@@ -116,7 +117,7 @@ class DuoService {
         return duo;
       }
     } catch (e) {
-      print('Error creating duo: $e');
+      debugPrint('Error creating duo: $e');
       throw Exception('Failed to create duo: ${e.toString()}');
     }
   }
@@ -160,7 +161,7 @@ class DuoService {
         // Save updated duo
         await prefs.setString('duo_$duoId', jsonEncode(duo.toJson()));
         
-        print('Joined mock duo with ID: $duoId and code: $code');
+        debugPrint('Joined mock duo with ID: $duoId and code: $code');
         return duo;
       } else {
         // Use Firestore
@@ -204,7 +205,7 @@ class DuoService {
         return duo;
       }
     } catch (e) {
-      print('Error joining duo: $e');
+      debugPrint('Error joining duo: $e');
       throw Exception('Failed to join duo: ${e.toString()}');
     }
   }
@@ -234,7 +235,7 @@ class DuoService {
         // Save updated duo
         await prefs.setString('duo_$duoId', jsonEncode(duo.toJson()));
         
-        print('Left mock duo with ID: $duoId');
+        debugPrint('Left mock duo with ID: $duoId');
       } else {
         // Use Firestore
         await _firestore
@@ -243,7 +244,7 @@ class DuoService {
             .update({'isActive': false});
       }
     } catch (e) {
-      print('Error leaving duo: $e');
+      debugPrint('Error leaving duo: $e');
       throw Exception('Failed to leave duo: ${e.toString()}');
     }
   }
