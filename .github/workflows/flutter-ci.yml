@@ -154,7 +154,7 @@ jobs:
         run: flutter build apk --split-per-abi --release
 
       - name: Upload APK Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-apks
           path: |
@@ -168,7 +168,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download APK artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: release-apks
           path: apks
