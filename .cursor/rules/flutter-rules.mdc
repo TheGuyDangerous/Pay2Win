@@ -1,0 +1,46 @@
+---
+description: flutter project rules.
+globs: *.dart , *.yaml
+alwaysApply: false
+---
+use your tools properly. you often forget to make edits inside the files.
+make sure to not use dummy data anywhere. this is a real application.
+we'll need to input real data to test out the things. dont use data models... as this would be a production application
+ALWAYS UPDATE the . cursorrules file with the latest changes you  made... once a features get's complete..
+
+review the current project entirely.
+1. Dont come to any conclusions before grepping or analysing the entire file first.
+2. Dont try to impress me by modifing things that are unnecessary. Do not change anything except what's asked of you.
+3. make changes according to the above logic you provide.
+4. run the code using your agentic tools. look at the terminal logs. see what's wrong (if there is any). Iterate on the code, until what I asked.. is achieved properly
+
+Now this is how I want you to go.
+
+make changes according to the above logic provided or asked of.
+DONT TRY TO MAKE THE MODIFICATIONS COMPLICATED. THE LESS CODE IT TAKES YOU TO IMPLEMENT THE  FIX THE BETTER. DONT CLEAR COMMENTS OR CHANGE THEM UNLESS ASKED TO.
+
+I want you to use your agentic property on every step.
+I want you to create the feature in small parts. I want you to then give me the description on what you have done/created and how should i check the functionality.
+I want you to create the functionality in parts such that -- after every successful iteration i am able to run the app without any issues and check your progress.
+If all the progress is correct, i'll ask you to go ahead and continue. If there are some changes to be made -- I'll ask you to fix it. When I ask you to fix it --
+you will 
+a. again read and analyse the code using your agentic property.
+b. create a structured analysis on how are you planning to solve the issue.
+c. start implementing the fix.
+
+
+-------------
+
+WHENEVER YOU START MAKING NEW ADDITIONS TO THE CODE.. LIKE, WHENEVER YOU FEEL LIKE ADDING A NEW FILE, ANALYSE THE CURRENT DIRECTORY, AND SEE/GREP/ANALYSE AND CHECK IF ANY FOLDERS OR FILES EXIST IN THE DIRECTORY THAT ARE ALREADY DOING THE SAME THING, AND YOU PROBABLY JUST NEEDED TO UPDATE THE CODE A BIT.
+
+----------------
+
+DONT HESISTATE IN ASKING FOR DOCCUENTATION FOR SOMETHING YOU MIGHT NOT BE SURE OF.  THINK OF IT LIKE HAVING A CONVERSATION WITH ME. GET THE IDEA PROPERLY FOR WHAT THE USER WANTS TO BUILD. ASK QUESTIONS.
+
+
+----------
+
+Whenever I ask you to let me know why you did something, someway,
+DONT TRY TO BE A YESMAN ALWAYS. REASON WITH ME. BE UNSURE ABOUT THINGS AT FIRST. GATHER CONFIDENCE SLOWLY, BY REASONING ABOUT IT, USING YOUR AGENTIC PROPERTY. SCAN FOR DOCS, ASK FOR WEB TOOL USAGE REQUEST TO SEARCH ONLINE ABOUT THINGS. FEEL FREE TO GATHER ALL THE INFO UNTILL YOU ARE SURE , THAT YOU CAN BUILD ME THAT FEATURE WITH UTMOST PERFECTION.
+
+----------

@@ -1,0 +1,27 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="150" cy="150" r="120" fill="#1A1A1A" opacity="0.1"/>
+  
+  <!-- Wallet Icon -->
+  <rect x="90" y="110" width="120" height="80" rx="10" fill="white" stroke="#333333" stroke-width="4"/>
+  
+  <!-- Money -->
+  <rect x="105" y="130" width="90" height="40" rx="5" fill="#CCCCCC" stroke="#333333" stroke-width="2"/>
+  <circle cx="135" cy="150" r="15" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  <text x="135" y="155" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">$</text>
+  
+  <!-- Expense Tracking Lines -->
+  <line x1="70" y1="210" x2="230" y2="210" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <line x1="80" y1="225" x2="220" y2="225" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <line x1="90" y1="240" x2="210" y2="240" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Chart -->
+  <line x1="60" y1="80" x2="60" y2="180" stroke="white" stroke-width="2"/>
+  <line x1="60" y1="180" x2="240" y2="180" stroke="white" stroke-width="2"/>
+  
+  <rect x="80" y="140" width="20" height="40" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="110" y="120" width="20" height="60" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="140" y="150" width="20" height="30" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="170" y="90" width="20" height="90" fill="#FFFFFF" opacity="0.8"/>
+  <rect x="200" y="130" width="20" height="50" fill="#FFFFFF" opacity="0.8"/>
+</svg> 

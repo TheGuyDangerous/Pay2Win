@@ -1,0 +1,33 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="150" cy="150" r="120" fill="#1A1A1A" opacity="0.1"/>
+  
+  <!-- Target/Goal -->
+  <circle cx="150" cy="130" r="80" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <circle cx="150" cy="130" r="60" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <circle cx="150" cy="130" r="40" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <circle cx="150" cy="130" r="20" fill="#FFFFFF" stroke="#333333" stroke-width="3"/>
+  
+  <!-- Arrow -->
+  <line x1="210" y1="190" x2="160" y2="140" stroke="#FFFFFF" stroke-width="4"/>
+  <polygon points="155,145 145,135 135,155" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  
+  <!-- Arrow Feathers -->
+  <line x1="205" y1="195" x2="215" y2="185" stroke="#FFFFFF" stroke-width="3"/>
+  <line x1="215" y1="195" x2="205" y2="185" stroke="#FFFFFF" stroke-width="3"/>
+  
+  <!-- Piggy Bank -->
+  <circle cx="210" cy="230" r="25" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  <circle cx="225" cy="225" r="3" fill="#333333"/>
+  <path d="M185 230 C185 215 195 205 210 205 C225 205 235 215 235 230 C235 245 225 255 210 255 C195 255 185 245 185 230Z" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  <path d="M235 230 L245 230 L245 240 L235 240" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  <path d="M185 225 C183 220 183 215 185 210" fill="none" stroke="#333333" stroke-width="2"/>
+  
+  <!-- Dollar Sign -->
+  <text x="210" y="235" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#333333">$</text>
+  
+  <!-- Success Sparkles -->
+  <path d="M90 90 L100 100 M90 100 L100 90" stroke="#FFFFFF" stroke-width="2"/>
+  <path d="M200 80 L210 90 M200 90 L210 80" stroke="#FFFFFF" stroke-width="2"/>
+  <path d="M90 180 L100 190 M90 190 L100 180" stroke="#FFFFFF" stroke-width="2"/>
+</svg> 

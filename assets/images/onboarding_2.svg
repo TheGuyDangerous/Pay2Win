@@ -1,0 +1,31 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="150" cy="150" r="120" fill="#1A1A1A" opacity="0.1"/>
+  
+  <!-- Trophy -->
+  <path d="M150 50 L180 80 L180 120 C180 140 165 160 150 170 C135 160 120 140 120 120 L120 80 L150 50Z" fill="#FFFFFF" stroke="#333333" stroke-width="3"/>
+  
+  <!-- Trophy Base -->
+  <rect x="135" y="170" width="30" height="15" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  <rect x="145" y="185" width="10" height="25" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  <rect x="125" y="210" width="50" height="5" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  
+  <!-- Trophy Handles -->
+  <path d="M180 90 C195 90 200 80 205 70 C210 80 205 95 180 95" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  <path d="M120 90 C105 90 100 80 95 70 C90 80 95 95 120 95" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  
+  <!-- Person 1 -->
+  <circle cx="100" cy="240" r="20" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  <line x1="100" y1="260" x2="100" y2="280" stroke="#FFFFFF" stroke-width="4"/>
+  <line x1="100" y1="270" x2="85" y2="290" stroke="#FFFFFF" stroke-width="4"/>
+  <line x1="100" y1="270" x2="115" y2="290" stroke="#FFFFFF" stroke-width="4"/>
+  
+  <!-- Person 2 -->
+  <circle cx="200" cy="240" r="20" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+  <line x1="200" y1="260" x2="200" y2="280" stroke="#FFFFFF" stroke-width="4"/>
+  <line x1="200" y1="270" x2="185" y2="290" stroke="#FFFFFF" stroke-width="4"/>
+  <line x1="200" y1="270" x2="215" y2="290" stroke="#FFFFFF" stroke-width="4"/>
+  
+  <!-- VS Text -->
+  <text x="150" y="240" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">VS</text>
+</svg> 
