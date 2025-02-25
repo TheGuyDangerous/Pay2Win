@@ -3,10 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/colors.dart';
-import '../../../core/widgets/dot_matrix_background.dart';
 import '../../../features/auth/providers/auth_provider.dart';
 import '../../../features/duo/providers/duo_provider.dart';
-import '../../expense/providers/expense_provider.dart';
 import '../providers/dashboard_provider.dart';
 import '../widgets/expense_comparison_chart.dart';
 import '../widgets/savings_progress_bar.dart';
@@ -22,7 +20,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _selectedPeriod = 'Daily';
-  bool _isSubmitting = false;
   
   @override
   void initState() {
@@ -45,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     final dashboardProvider = Provider.of<DashboardProvider>(context);
-    final expenseProvider = Provider.of<ExpenseProvider>(context);
     
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDarkMode ? AppColors.white : AppColors.black;
@@ -388,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       Row(
                         children: [
                           Text(
-                            '$greeting',
+                            greeting,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -439,7 +435,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         errorBuilder: (context, error, stackTrace) {
                           return Center(
                             child: Text(
-                              currentUser.displayName?.substring(0, 1).toUpperCase() ?? '?',
+                              currentUser.displayName.substring(0, 1).toUpperCase(),
                               style: TextStyle(
                                 color: textColor,
                                 fontSize: 16,
@@ -451,7 +447,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       )
                     : Center(
                         child: Text(
-                          currentUser?.displayName?.substring(0, 1).toUpperCase() ?? '?',
+                        currentUser?.displayName.substring(0, 1).toUpperCase() ?? '?',
                           style: TextStyle(
                             color: textColor,
                             fontSize: 16,
@@ -567,14 +563,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
-                      const Icon(
+                       Icon(
                         Icons.logout,
                         color: AppColors.red,
                         size: 20,
                       ),
-                      const SizedBox(width: 12),
+                       SizedBox(width: 12),
                       Text(
                         'Log Out',
                         style: TextStyle(
@@ -703,10 +699,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         ],
       ),
     );
-  }
-
-  void _submitExpense() {
-    // Implementation of _submitExpense method
   }
 }
 

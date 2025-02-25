@@ -4,6 +4,7 @@ import '../models/expense_model.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart'; // Import to access useMockData
+import 'package:flutter/foundation.dart';
 
 class ExpenseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -36,7 +37,7 @@ class ExpenseService {
             .toList();
       }
     } catch (e) {
-      print('Failed to get expenses: $e');
+      debugPrint('Failed to get expenses: $e');
       throw Exception('Failed to get expenses: ${e.toString()}');
     }
   }
@@ -127,7 +128,7 @@ class ExpenseService {
         // Save back to local storage
         await prefs.setStringList('expenses_$duoId', expensesJson);
         
-        print('Added mock expense with ID: $expenseId');
+        debugPrint('Added mock expense with ID: $expenseId');
         return expenseId;
       } else {
         // Use Firestore for real data
@@ -144,7 +145,7 @@ class ExpenseService {
         return docRef.id;
       }
     } catch (e) {
-      print('Error adding expense: $e');
+      debugPrint('Error adding expense: $e');
       throw Exception('Failed to add expense: ${e.toString()}');
     }
   }

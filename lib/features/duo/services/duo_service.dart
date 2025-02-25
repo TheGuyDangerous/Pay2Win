@@ -270,7 +270,7 @@ class DuoService {
         return codeDoc.exists;
       }
     } catch (e) {
-      print('Error checking code validity: $e');
+      debugPrint('Error checking code validity: $e');
       throw Exception('Failed to check code validity: ${e.toString()}');
     }
   }

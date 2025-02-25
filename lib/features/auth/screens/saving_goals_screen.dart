@@ -10,9 +10,9 @@ class SavingGoalsScreen extends StatefulWidget {
   final Map<String, dynamic> userData;
 
   const SavingGoalsScreen({
-    Key? key,
+    super.key,
     required this.userData,
-  }) : super(key: key);
+  });
 
   @override
   State<SavingGoalsScreen> createState() => _SavingGoalsScreenState();
@@ -49,7 +49,7 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
     });
     
     // Debug print to verify goal selection is working
-    print('Selected goals: $_selectedGoals');
+    debugPrint('Selected goals: $_selectedGoals');
   }
 
   void _addCustomGoal() {
@@ -60,7 +60,7 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
       });
       
       // Debug print to verify custom goal is added
-      print('Added custom goal. Selected goals: $_selectedGoals');
+      debugPrint('Added custom goal. Selected goals: $_selectedGoals');
     }
   }
 
@@ -81,7 +81,7 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
     setState(() {});
     
     try {
-      print('Starting registration with goals: $_selectedGoals');
+      debugPrint('Starting registration with goals: $_selectedGoals');
       
       // Add selected goals to user data
       final userData = {
@@ -89,7 +89,7 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
         'savingGoals': _selectedGoals,
       };
       
-      print('Calling authProvider.register with data: $userData');
+      debugPrint('Calling authProvider.register with data: $userData');
       
       // Register the user
       final success = await authProvider.register(
@@ -100,13 +100,13 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
         _selectedGoals, // Pass _selectedGoals directly to ensure it's not lost
       );
       
-      print('Registration result: $success');
+      debugPrint('Registration result: $success');
       
       if (!mounted) return;
       
       // FORCE NAVIGATION: Even if there are Firestore errors, if Firebase Auth created the account, proceed
       if (success || authProvider.user != null) {
-        print('Registration successful or user object exists, navigating to home screen');
+        debugPrint('Registration successful or user object exists, navigating to home screen');
         
         // Save any necessary data to shared preferences before navigation
         try {
@@ -115,22 +115,25 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
             await prefs.setString(AppConstants.prefKeyUser, authProvider.user!.id);
           }
         } catch (e) {
-          print('Error saving to shared preferences: $e');
+          debugPrint('Error saving to shared preferences: $e');
         }
         
         // Navigate to home screen - using pushReplacementNamed as a fallback if pushNamedAndRemoveUntil fails
         try {
+          if (!mounted) return;
           Navigator.of(context).pushNamedAndRemoveUntil(
             AppConstants.routeHome, 
             (route) => false
           );
         } catch (navError) {
-          print('Navigation error: $navError, trying alternative method');
+          debugPrint('Navigation error: $navError, trying alternative method');
+          if (!mounted) return;
           Navigator.of(context).pushReplacementNamed(AppConstants.routeHome);
         }
       } else {
-        print('Registration failed with error: ${authProvider.error}');
+        debugPrint('Registration failed with error: ${authProvider.error}');
         // Show error
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(authProvider.error ?? 'Registration failed. Please check your Firebase configuration.'),
@@ -145,16 +148,18 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
         );
       }
     } catch (e) {
-      print('Exception during registration: $e');
+      debugPrint('Exception during registration: $e');
       
       // Even if there's an exception, check if the user was created
       if (authProvider.user != null) {
-        print('User exists despite exception, navigating to home screen');
+        debugPrint('User exists despite exception, navigating to home screen');
+        if (!mounted) return;
         Navigator.of(context).pushReplacementNamed(AppConstants.routeHome);
         return;
       }
       
       // Show error
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Registration error: ${e.toString()}'),
@@ -242,8 +247,8 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
             
             const SizedBox(height: 24),
             
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -335,7 +340,7 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Selected Goals:',
                       style: TextStyle(
                         fontSize: 16,
@@ -348,7 +353,7 @@ class _SavingGoalsScreenState extends State<SavingGoalsScreen> {
                       runSpacing: 8,
                       children: _selectedGoals.map((goal) => Chip(
                         label: Text(goal),
-                        deleteIcon: Icon(Icons.close, size: 16),
+                        deleteIcon: const Icon(Icons.close, size: 16),
                         onDeleted: () {
                           setState(() {
                             _selectedGoals.remove(goal);

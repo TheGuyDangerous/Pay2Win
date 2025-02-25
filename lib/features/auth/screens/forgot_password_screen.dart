@@ -61,8 +61,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDarkMode ? AppColors.white : AppColors.black;
     
     return Scaffold(
       body: SafeArea(

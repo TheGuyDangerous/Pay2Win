@@ -37,6 +37,7 @@ class _ExpensesHistoryScreenState extends State<ExpensesHistoryScreen> {
       await expenseProvider.getExpenses("current_duo_id");
     } catch (e) {
       // Handle error
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Failed to load expenses: $e'),

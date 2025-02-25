@@ -64,18 +64,16 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     }
     
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    bool authInitialized = false;
     
     try {
       await authProvider.initialize();
-      authInitialized = true;
     } catch (e) {
-      print('Error initializing auth provider: $e');
+      debugPrint('Error initializing auth provider: $e');
       
       // If we have a current Firebase user but Firestore failed, create a minimal user
       final currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
-        print('Firebase user exists despite Firestore error, creating minimal user');
+        debugPrint('Firebase user exists despite Firestore error, creating minimal user');
         
         // Create a minimal user from Firebase Auth data
         final minimalUser = UserModel(
@@ -91,7 +89,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         
         // Set the user in the provider
         authProvider.setUser(minimalUser);
-        authInitialized = true;
       }
     }
     
@@ -103,10 +100,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     // Even if auth initialization failed but we have a saved user ID, try to navigate to home
     final savedUserId = prefs.getString(AppConstants.prefKeyUser);
     if (authProvider.isAuthenticated || (savedUserId != null && savedUserId.isNotEmpty)) {
-      print('User is authenticated or has saved ID');
+      debugPrint('User is authenticated or has saved ID');
       
       // Check if the user has an active duo
-      final duoId = prefs.getString(AppConstants.prefKeyDuo);
       final duoProvider = Provider.of<DuoProvider>(context, listen: false);
       
       try {
@@ -115,23 +111,28 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         
         if (duoProvider.hasDuo) {
           // User has a duo, go to home screen
-          print('User has an active duo, going to home screen');
+          debugPrint('User has an active duo, going to home screen');
+          if (!mounted) return;
           Navigator.of(context).pushReplacementNamed(AppConstants.routeHome);
         } else {
           // User doesn't have a duo, go to duo selector
-          print('User needs to create or join a duo');
+          debugPrint('User needs to create or join a duo');
+          if (!mounted) return;
           Navigator.of(context).pushReplacementNamed(AppConstants.routeDuoSelector);
         }
       } catch (e) {
-        print('Error checking duo status: $e');
+        debugPrint('Error checking duo status: $e');
         // In case of error, default to duo selector
+        if (!mounted) return;
         Navigator.of(context).pushReplacementNamed(AppConstants.routeDuoSelector);
       }
     } else if (!onboardingComplete) {
-      print('Onboarding not complete, going to onboarding screen');
+      debugPrint('Onboarding not complete, going to onboarding screen');
+      if (!mounted) return;
       Navigator.of(context).pushReplacementNamed(AppConstants.routeOnboarding);
     } else {
-      print('No authenticated user, going to login screen');
+      debugPrint('No authenticated user, going to login screen');
+      if (!mounted) return;
       Navigator.of(context).pushReplacementNamed(AppConstants.routeLogin);
     }
   }

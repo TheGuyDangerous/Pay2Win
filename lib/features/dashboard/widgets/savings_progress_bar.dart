@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/colors.dart';
-import 'dart:math' as Math;
+import 'dart:math' as math;
 
 class SavingsProgressBar extends StatelessWidget {
   final double user1Savings;
@@ -21,8 +21,6 @@ class SavingsProgressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final winner = user1Savings > user2Savings ? user1Name : user2Name;
-    final winnerSavings = user1Savings > user2Savings ? user1Savings : user2Savings;
-    final loserSavings = user1Savings > user2Savings ? user2Savings : user1Savings;
     final savingsDifference = (user1Savings - user2Savings).abs();
     
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -320,13 +318,13 @@ class MonochromeSavingsChart extends StatelessWidget {
     final textColor = isDarkMode ? AppColors.white : AppColors.black;
     
     // Create comparison data - ensure we use absolute values to prevent negative heights
-    final double maxSavings = Math.max(user1Savings.abs(), user2Savings.abs());
+    final double maxSavings = math.max(user1Savings.abs(), user2Savings.abs());
     final double user1Percentage = maxSavings > 0 ? user1Savings.abs() / maxSavings : 0;
     final double user2Percentage = maxSavings > 0 ? user2Savings.abs() / maxSavings : 0;
     
     // Ensure we have a minimum height for visual purposes
-    final double user1BarHeight = Math.max(10.0, 50.0 * user1Percentage);
-    final double user2BarHeight = Math.max(10.0, 50.0 * user2Percentage);
+    final double user1BarHeight = math.max(10.0, 50.0 * user1Percentage);
+    final double user2BarHeight = math.max(10.0, 50.0 * user2Percentage);
     
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

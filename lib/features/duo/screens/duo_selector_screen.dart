@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/colors.dart';
-import '../../../core/widgets/custom_button.dart';
-import '../../../core/widgets/custom_text_field.dart';
 import '../../../core/constants/app_constants.dart';
 import '../providers/duo_provider.dart';
-import 'package:share_plus/share_plus.dart';
 import '../../../core/widgets/dot_matrix_background.dart';
 
 class DuoSelectorScreen extends StatelessWidget {
@@ -15,7 +11,6 @@ class DuoSelectorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final duoProvider = Provider.of<DuoProvider>(context);
     
     return Scaffold(
       backgroundColor: AppColors.black,
@@ -151,7 +146,7 @@ class DuoSelectorScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               color: AppColors.white,
               size: 16,

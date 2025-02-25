@@ -422,7 +422,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildGoalsStep() {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDarkMode ? AppColors.white : AppColors.black;
-    final borderColor = isDarkMode ? AppColors.white : AppColors.black;
+    
     
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

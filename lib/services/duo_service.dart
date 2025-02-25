@@ -253,8 +253,6 @@ class DuoService {
         throw Exception('Duo not found');
       }
       
-      final duoData = duoDoc.data() as Map<String, dynamic>;
-      
       // Delete duo document
       await _firestore.collection(AppConstants.collectionDuos).doc(duoId).delete();
     } catch (e) {

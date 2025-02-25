@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../models/duo_model.dart';
 import '../../../models/expense_model.dart';
@@ -272,7 +270,7 @@ class DashboardProvider extends ChangeNotifier {
         final daysInMonth = DateTime(now.year, now.month + 1, 0).day;
         
         // Use either real values or defaults
-        final user1MonthlySalary = currentUser.monthlySalary ?? AppConstants.defaultMonthlySalary;
+        final user1MonthlySalary = currentUser.monthlySalary;
         final user2MonthlySalary = _partner?.monthlySalary ?? AppConstants.defaultMonthlySalary;
         
         _user1DailyBudget = user1MonthlySalary / daysInMonth;
@@ -360,16 +358,14 @@ class DashboardProvider extends ChangeNotifier {
       // Get the current month and the two previous months
       for (int i = 2; i >= 0; i--) {
         final month = now.month - i;
-        final year = now.year;
         final adjustedMonth = month <= 0 ? month + 12 : month;
-        final adjustedYear = month <= 0 ? year - 1 : year;
         
         final monthNames = [
           'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
           'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
         ];
         
-        months.add('${monthNames[adjustedMonth - 1]}');
+        months.add(monthNames[adjustedMonth - 1]);
       }
       
       for (final month in months) {
@@ -497,11 +493,11 @@ class DashboardProvider extends ChangeNotifier {
     
     // User's total
     final userExpenses = expenses.where((e) => e.userId == userId);
-    result['user'] = userExpenses.fold(0, (sum, expense) => sum + expense.amount);
+    result['user'] = userExpenses.fold(0, (total, expense) => total + expense.amount);
     
     // Partner's total
     final partnerExpenses = expenses.where((e) => e.userId != userId);
-    result['partner'] = partnerExpenses.fold(0, (sum, expense) => sum + expense.amount);
+    result['partner'] = partnerExpenses.fold(0, (total, expense) => total + expense.amount);
     
     return result;
   }

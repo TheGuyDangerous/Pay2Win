@@ -76,6 +76,7 @@ class ExpenseProvider extends ChangeNotifier {
     String description,
     String? receiptUrl,
     String paymentMethod,
+    DateTime timestamp,
   ) async {
     _setLoading(true);
     
@@ -87,7 +88,7 @@ class ExpenseProvider extends ChangeNotifier {
         amount: amount,
         category: category,
         description: description,
-        timestamp: DateTime.now(),
+        timestamp: timestamp,
         receiptUrl: receiptUrl,
         paymentMethod: paymentMethod,
       );

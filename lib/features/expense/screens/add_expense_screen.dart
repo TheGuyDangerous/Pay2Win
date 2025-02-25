@@ -178,15 +178,15 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       // });
       
       // Wait for upload to complete
-      await uploadTask.whenComplete(() => print('Receipt upload complete'));
+      await uploadTask.whenComplete(() => debugPrint('Receipt upload complete'));
       
       // Get download URL
       final String downloadUrl = await storageRef.getDownloadURL();
-      print('Receipt uploaded: $downloadUrl');
+      debugPrint('Receipt uploaded: $downloadUrl');
       
       return downloadUrl;
     } catch (e) {
-      print('Error uploading receipt: $e');
+        debugPrint('Error uploading receipt: $e');
       // Return null on error, but don't fail the whole expense creation
       return null;
     }
@@ -237,6 +237,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         _descriptionController.text,
         receiptUrl,
         _selectedPaymentMethod,
+        timestamp,
       );
 
       if (!mounted) return;

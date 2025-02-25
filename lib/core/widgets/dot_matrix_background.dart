@@ -41,7 +41,7 @@ class DotMatrixPainter extends CustomPainter {
       ..strokeWidth = 1.0
       ..strokeCap = StrokeCap.round;
     
-    final double dotSize = 1.0;
+    const double dotSize = 1.0;
     
     for (double x = 0; x < size.width; x += spacing) {
       for (double y = 0; y < size.height; y += spacing) {

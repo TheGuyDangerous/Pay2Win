@@ -7,13 +7,10 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/colors.dart';
-import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/dot_matrix_background.dart';
-import '../models/duo_model.dart';
 import '../providers/duo_provider.dart';
 import '../../auth/providers/auth_provider.dart';
-import '../../../main.dart'; // Import for useMockData
-import 'dart:math' as math;
+import '../../../main.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class DuoManagementScreen extends StatefulWidget {
@@ -26,7 +23,6 @@ class DuoManagementScreen extends StatefulWidget {
 class _DuoManagementScreenState extends State<DuoManagementScreen> {
   bool _isLoading = false;
   bool _confirmingLeave = false;
-  bool _isUploading = false;
   AuthProvider? _authProvider;
 
   @override
@@ -48,9 +44,6 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
         body: const Center(child: Text('No active duo found')),
       );
     }
-
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDarkMode ? AppColors.white : AppColors.black;
     
     // Get the partner information
     final isUser1 = currentUser.id == currentDuo.user1Id;
@@ -155,7 +148,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
                     
                     // Invite Link Section (only shown if duo is not complete)
                     if (!isDuoComplete) ...[
-                      Text(
+                      const Text(
                         'INVITE YOUR PARTNER',
                         style: TextStyle(
                           color: AppColors.white,
@@ -167,7 +160,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
                       ),
                       const SizedBox(height: 16),
                       
-                      Text(
+                      const Text(
                         'Share this code with your friend to complete your duo:',
                         style: TextStyle(
                           color: AppColors.lightGrey,
@@ -204,7 +197,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
                         },
                       ),
                     ] else ...[
-                      Text(
+                      const Text(
                         'Are you sure you want to leave this duo?',
                         style: TextStyle(
                           color: AppColors.white,
@@ -362,7 +355,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
                 ),
               ),
               child: isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Icon(
                         Icons.person_add_outlined,
                         color: AppColors.lightGrey,
@@ -512,6 +505,9 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
   
   // Helper method to leave duo
   Future<void> _leaveDuo(BuildContext context, DuoProvider duoProvider) async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final navigator = Navigator.of(context);
+    
     setState(() {
       _isLoading = true;
     });
@@ -519,10 +515,12 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
     try {
       final success = await duoProvider.leaveDuo();
       
-      if (success && mounted) {
-        Navigator.pushReplacementNamed(context, AppConstants.routeDuoSelector);
-      } else if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
+      if (!mounted) return;
+      
+      if (success) {
+        navigator.pushReplacementNamed(AppConstants.routeDuoSelector);
+      } else {
+        scaffoldMessenger.showSnackBar(
           SnackBar(
             content: Text('Failed to leave duo: ${duoProvider.error}'),
             backgroundColor: Colors.red,
@@ -598,8 +596,8 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
               ),
               // Add a Delete option with a red icon for emphasis
               ListTile(
-                leading: Icon(Icons.delete_outline, color: Colors.red),
-                title: Text(
+                leading: const Icon(Icons.delete_outline, color: Colors.red),
+                title: const Text(
                   'Remove profile picture',
                   style: TextStyle(
                     color: Colors.red,
@@ -621,10 +619,8 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
 
   // Helper method to handle profile image selection
   Future<void> _selectImageSource(ImageSource source) async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    
     setState(() {
-      _isUploading = true;
+      _isLoading = true;
     });
     
     try {
@@ -641,7 +637,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
     } finally {
       if (mounted) {
         setState(() {
-          _isUploading = false;
+          _isLoading = false;
         });
       }
     }
@@ -660,7 +656,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
       if (pickedFile != null) {
         // Show loading state
         setState(() {
-          _isUploading = true;
+          _isLoading = true;
         });
         
         String? downloadUrl;
@@ -669,7 +665,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
           if (useMockData) {
             await Future.delayed(const Duration(seconds: 1)); // Simulate network delay
             downloadUrl = 'https://example.com/profile/${DateTime.now().millisecondsSinceEpoch}.jpg';
-            print('Mock profile image upload: $downloadUrl');
+            debugPrint('Mock profile image upload: $downloadUrl');
           } else {
             // Upload to Firebase Storage
             final File imageFile = File(pickedFile.path);
@@ -683,31 +679,32 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
             final uploadTask = storageRef.putFile(imageFile);
             
             // Wait for upload to complete
-            await uploadTask.whenComplete(() => print('Profile image upload complete'));
+            await uploadTask.whenComplete(() =>  debugPrint('Profile image upload complete'));
             
             // Get download URL
             downloadUrl = await storageRef.getDownloadURL();
-            print('Profile image uploaded: $downloadUrl');
+            debugPrint('Profile image uploaded: $downloadUrl');
           }
           
           // Update the user's profile picture
+          // ignore: unnecessary_null_comparison
           if (downloadUrl != null) {
             await _authProvider!.updateProfilePicture(downloadUrl);
           }
         } catch (e) {
-          print('Error uploading profile image: $e');
+          debugPrint('Error uploading profile image: $e');
           _showSnackBar('Failed to upload profile image: ${e.toString()}');
         } finally {
           // Hide loading state
           if (mounted) {
             setState(() {
-              _isUploading = false;
+              _isLoading = false;
             });
           }
         }
       }
     } catch (e) {
-      print('Error picking image: $e');
+      debugPrint('Error picking image: $e');
       _showSnackBar('Failed to select image: ${e.toString()}');
     }
   }
@@ -716,7 +713,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
   Future<void> _removeProfilePicture() async {
     try {
       setState(() {
-        _isUploading = true;
+        _isLoading = true;
       });
       
       // Pass empty string to indicate profile picture removal
@@ -745,7 +742,7 @@ class _DuoManagementScreenState extends State<DuoManagementScreen> {
     } finally {
       if (mounted) {
         setState(() {
-          _isUploading = false;
+          _isLoading = false;
         });
       }
     }

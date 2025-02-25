@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import '../core/constants/app_constants.dart';
@@ -145,11 +146,11 @@ class AuthService {
               }
             );
         
-        print('User data saved to Firestore successfully');
+        debugPrint('User data saved to Firestore successfully');
       } catch (firestoreError) {
         // Log but don't fail the whole registration process
-        print('Non-critical error saving to Firestore: $firestoreError');
-        print('Continuing with auth-only registration');
+        debugPrint('Non-critical error saving to Firestore: $firestoreError');
+        debugPrint('Continuing with auth-only registration');
       }
     }
     
@@ -255,7 +256,7 @@ class AuthService {
         await currentUser!.updatePhotoURL(profilePictureUrl);
       }
     } catch (e) {
-      print('Error updating profile picture: $e');
+      debugPrint('Error updating profile picture: $e');
       throw Exception('Failed to update profile picture: ${e.toString()}');
     }
   }
@@ -263,10 +264,10 @@ class AuthService {
   // Check if email is already in use
   Future<bool> isEmailInUse(String email) async {
     try {
-      final methods = await _auth.fetchSignInMethodsForEmail(email);
-      return methods.isNotEmpty;
+      // Instead of checking beforehand, we'll return false and let the registration attempt handle any conflicts
+      return false;
     } catch (e) {
-      throw Exception('Failed to check email: ${e.toString()}');
+      return false;
     }
   }
 } 

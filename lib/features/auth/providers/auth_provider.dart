@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
@@ -80,8 +79,8 @@ class AuthProvider extends ChangeNotifier {
         // Non-fatal error, continue
       }
       
-      // If context is provided, reset any existing data from previous users
-      if (context != null) {
+      // If context is provided and widget is still mounted, reset any existing data from previous users
+      if (context != null && context.mounted) {
         // Reset all providers to clear previous user data
         GlobalProviderResets.resetAllProviders(context);
       }
@@ -123,10 +122,10 @@ class AuthProvider extends ChangeNotifier {
       } catch (authError) {
         debugPrint('Error in Firebase Auth registration: $authError');
         // Rethrow authentication errors
-        throw authError;
+        rethrow;
       }
       
-      if (userCredential != null && userCredential.user != null) {
+      if (userCredential.user != null) {
         try {
           // Try to get user data from Firestore
           _user = await _authService.getUserData(userCredential.user!.uid);
@@ -187,8 +186,10 @@ class AuthProvider extends ChangeNotifier {
       // Clear local user data
       _user = null;
       
-      // Reset all providers to clear their data
-      GlobalProviderResets.resetAllProviders(context);
+      // Reset all providers to clear their data if widget is still mounted
+      if (context.mounted) {
+        GlobalProviderResets.resetAllProviders(context);
+      }
       
       notifyListeners();
       return true;
