@@ -74,7 +74,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     surface: AppColors.white,
                     onSurface: AppColors.black,
                   ),
-            dialogBackgroundColor: isDarkMode ? AppColors.black : AppColors.white,
+            dialogTheme: DialogTheme(
+              backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
+            ),
           ),
           child: child!,
         );
@@ -111,7 +113,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     surface: AppColors.white,
                     onSurface: AppColors.black,
                   ),
-            dialogBackgroundColor: isDarkMode ? AppColors.black : AppColors.white,
+            dialogTheme: DialogTheme(
+              backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
+            ),
           ),
           child: child!,
         );

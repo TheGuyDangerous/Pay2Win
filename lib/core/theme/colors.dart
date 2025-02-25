@@ -13,8 +13,8 @@ class AppColors {
   static const Color red = Color(0xFFFF0000);
   
   // Transparent Colors
-  static Color blackTransparent(double opacity) => black.withOpacity(opacity);
-  static Color whiteTransparent(double opacity) => white.withOpacity(opacity);
+  static Color blackTransparent(double opacity) => black.withAlpha((opacity * 255).round());
+  static Color whiteTransparent(double opacity) => white.withAlpha((opacity * 255).round());
   
   // Dot Matrix Pattern Color
   static const Color dotMatrix = Color(0xFFCCCCCC);

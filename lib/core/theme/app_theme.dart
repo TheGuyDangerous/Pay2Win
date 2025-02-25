@@ -26,8 +26,6 @@ class AppTheme {
         secondary: AppColors.darkGrey,
         onSecondary: AppColors.white,
         error: AppColors.red,
-        background: AppColors.white,
-        onBackground: AppColors.black,
         surface: AppColors.white,
         onSurface: AppColors.black,
       ),
@@ -72,7 +70,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.lightGrey.withOpacity(0.3),
+        fillColor: AppColors.lightGrey.withAlpha((0.3 * 255).round()),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,
@@ -177,8 +175,6 @@ class AppTheme {
         secondary: AppColors.lightGrey,
         onSecondary: AppColors.black,
         error: AppColors.red,
-        background: AppColors.black,
-        onBackground: AppColors.white,
         surface: AppColors.black,
         onSurface: AppColors.white,
       ),
@@ -223,7 +219,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.darkGrey.withOpacity(0.3),
+        fillColor: AppColors.darkGrey.withAlpha((0.3 * 255).round()),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,

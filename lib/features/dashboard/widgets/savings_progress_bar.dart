@@ -63,7 +63,7 @@ class SavingsProgressBar extends StatelessWidget {
           context,
           user2Name,
           user2Savings,
-          textColor.withOpacity(0.7),
+          textColor.withAlpha((0.7 * 255).round()),
           borderColor,
           isDarkMode,
         ),
@@ -76,7 +76,7 @@ class SavingsProgressBar extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: borderColor.withOpacity(0.5)),
+            border: Border.all(color: borderColor.withAlpha((0.5 * 255).round())),
           ),
           child: Stack(
             children: [
@@ -84,7 +84,7 @@ class SavingsProgressBar extends StatelessWidget {
               Positioned.fill(
                 child: CustomPaint(
                   painter: DotMatrixPainter(
-                    dotColor: borderColor.withOpacity(0.1),
+                    dotColor: borderColor.withAlpha((0.1 * 255).round()),
                     spacing: 8,
                   ),
                 ),
@@ -112,7 +112,7 @@ class SavingsProgressBar extends StatelessWidget {
                       fontSize: 10,
                       letterSpacing: 0.8,
                       fontFamily: 'SpaceMono',
-                      color: textColor.withOpacity(0.7),
+                      color: textColor.withAlpha((0.7 * 255).round()),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -129,7 +129,7 @@ class SavingsProgressBar extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.transparent,
-            border: Border.all(color: borderColor.withOpacity(0.5)),
+            border: Border.all(color: borderColor.withAlpha((0.5 * 255).round())),
             borderRadius: BorderRadius.circular(8),
           ),
           padding: const EdgeInsets.all(12),
@@ -154,7 +154,7 @@ class SavingsProgressBar extends StatelessWidget {
                   fontSize: 10,
                   letterSpacing: 0.8,
                   fontFamily: 'SpaceMono',
-                  color: textColor.withOpacity(0.6),
+                  color: textColor.withAlpha((0.6 * 255).round()),
                 ),
               ),
               const SizedBox(height: 12),
@@ -168,7 +168,7 @@ class SavingsProgressBar extends StatelessWidget {
                     Positioned.fill(
                       child: CustomPaint(
                         painter: DotMatrixPainter(
-                          dotColor: borderColor.withOpacity(0.05),
+                          dotColor: borderColor.withAlpha((0.05 * 255).round()),
                           spacing: 10,
                         ),
                       ),
@@ -243,7 +243,7 @@ class SavingsProgressBar extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: Colors.transparent,
-            border: Border.all(color: borderColor.withOpacity(0.3)),
+            border: Border.all(color: borderColor.withAlpha((0.3 * 255).round())),
           ),
           child: Stack(
             children: [
@@ -252,7 +252,7 @@ class SavingsProgressBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 child: CustomPaint(
                   painter: DotMatrixPainter(
-                    dotColor: borderColor.withOpacity(0.1),
+                    dotColor: borderColor.withAlpha((0.1 * 255).round()),
                     spacing: 4,
                   ),
                   size: const Size.fromHeight(10),
@@ -281,7 +281,7 @@ class SavingsProgressBar extends StatelessWidget {
                     ),
                     child: CustomPaint(
                       painter: DotMatrixPainter(
-                        dotColor: isDarkMode ? Colors.black.withOpacity(0.1) : Colors.white.withOpacity(0.3),
+                        dotColor: isDarkMode ? Colors.black.withAlpha((0.1 * 255).round()) : Colors.white.withAlpha((0.3 * 255).round()),
                         spacing: 4,
                       ),
                       size: const Size.fromHeight(10),
@@ -357,8 +357,8 @@ class MonochromeSavingsChart extends StatelessWidget {
                 child: CustomPaint(
                   painter: DotMatrixPainter(
                     dotColor: isDarkMode 
-                      ? Colors.black.withOpacity(0.2) 
-                      : Colors.white.withOpacity(0.3),
+                      ? Colors.black.withAlpha((0.2 * 255).round()) 
+                      : Colors.white.withAlpha((0.3 * 255).round()),
                     spacing: 6,
                   ),
                 ),
@@ -387,7 +387,7 @@ class MonochromeSavingsChart extends StatelessWidget {
               Container(
                 height: 30,
                 width: 1,
-                color: barColor.withOpacity(0.3),
+                color: barColor.withAlpha((0.3 * 255).round()),
               ),
               const SizedBox(height: 6),
               Text(
@@ -396,7 +396,7 @@ class MonochromeSavingsChart extends StatelessWidget {
                   fontSize: 12,
                   letterSpacing: 1.0,
                   fontFamily: 'SpaceMono',
-                  color: textColor.withOpacity(0.7),
+                  color: textColor.withAlpha((0.7 * 255).round()),
                 ),
               ),
             ],
@@ -414,7 +414,7 @@ class MonochromeSavingsChart extends StatelessWidget {
                   fontSize: 14,
                   letterSpacing: 0.5,
                   fontFamily: 'SpaceMono',
-                  color: textColor.withOpacity(0.7),
+                  color: textColor.withAlpha((0.7 * 255).round()),
                 ),
               ),
               const SizedBox(height: 6),
@@ -422,14 +422,14 @@ class MonochromeSavingsChart extends StatelessWidget {
                 height: user2BarHeight, // Using calculated safe height
                 width: 32, // Smaller width for bars
                 decoration: BoxDecoration(
-                  color: barColor.withOpacity(0.6),
-                  border: Border.all(color: barColor.withOpacity(0.6)),
+                  color: barColor.withAlpha((0.6 * 255).round()),
+                  border: Border.all(color: barColor.withAlpha((0.6 * 255).round())),
                 ),
                 child: CustomPaint(
                   painter: DotMatrixPainter(
                     dotColor: isDarkMode 
-                      ? Colors.black.withOpacity(0.2) 
-                      : Colors.white.withOpacity(0.3),
+                      ? Colors.black.withAlpha((0.2 * 255).round()) 
+                      : Colors.white.withAlpha((0.3 * 255).round()),
                     spacing: 6,
                   ),
                 ),
@@ -441,7 +441,7 @@ class MonochromeSavingsChart extends StatelessWidget {
                   fontSize: 12,
                   letterSpacing: 0.8,
                   fontFamily: 'SpaceMono',
-                  color: textColor.withOpacity(0.7),
+                  color: textColor.withAlpha((0.7 * 255).round()),
                 ),
               ),
             ],

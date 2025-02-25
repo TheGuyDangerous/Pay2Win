@@ -13,8 +13,7 @@ class DotMatrixBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = dotColor ?? AppColors.white.withOpacity(0.03);
-    
+    final color = dotColor ?? AppColors.white.withAlpha(3);
     return Positioned.fill(
       child: CustomPaint(
         painter: DotMatrixPainter(
